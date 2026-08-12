@@ -45,15 +45,7 @@ Kanchan-Player/
 ├── README.md
 │
 ├── templates/
-│   └── index.html
-│
-└── static/
-    ├── css/
-    │   └── style.css
-    ├── js/
-    │   └── app.js
-    └── images/
-        └── ...
+    └── index.html
 ```
 
 ---
@@ -74,7 +66,7 @@ Kanchan-Player/
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/kanchanmaji/kanchan-music-player.git
 cd Kanchan-Player
 ```
 
@@ -232,17 +224,17 @@ The endpoint resolves the available audio stream and redirects the request to th
 
 ```text
                     ┌──────────────────┐
-                    │    User / UI     │
+                    │    User / UI        │
                     └────────┬─────────┘
                              │
                              ▼
                     ┌──────────────────┐
-                    │   Flask Server   │
+                    │   Flask Server      │
                     └────────┬─────────┘
                              │
              ┌───────────────┼───────────────┐
-             │               │               │
-             ▼               ▼               ▼
+             │               │             │
+             ▼               ▼            ▼
         /api/parse      /api/stream     /api/download
              │               │               │
              └───────────────┼───────────────┘
@@ -422,30 +414,15 @@ Do not use the software to circumvent access controls or obtain content without 
 **Kanchan Player** is designed and developed by **Kanchan Maji**.
 
 ```text
-╔══════════════════════════════════════╗
+╔════════════════════════════════╗
 ║                                      ║
 ║          K A N C H A N               ║
 ║                                      ║
 ║          Kanchan Player              ║
 ║                                      ║
-╚══════════════════════════════════════╝
+╚════════════════════════════════╝
 ```
 
----
-
-# 📄 License
-
-Choose an appropriate open-source license before distributing the project publicly.
-
-For example:
-
-```text
-MIT License
-```
-
-If using MIT, include the standard MIT License text in a separate `LICENSE` file.
-
----
 
 <div align="center">
 
