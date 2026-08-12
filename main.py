@@ -1,43 +1,22 @@
 import os
 from functools import lru_cache
 from flask import Flask, request, jsonify, render_template, redirect
-from flask_cors import CORS
 import yt_dlp
 
 app = Flask(__name__)
-CORS(app) # Prevents frontend blocking if accessed across local networks
 
-@app.route('/api/health', methods=['GET'])
-def health_check():
-    return jsonify({
-        "status": "online",
-        "provider": "Groq",
-        "models": [
-            "llama-3.3-70b-versatile",
-            "llama-3.1-8b-instant",
-            "mixtral-8x7b-32768",
-            "gemma2-9b-it",
-            "whisper-large-v3"
-        ]
-    }), 200
-  
-# --- CACHING LOGIC ---
 @lru_cache(maxsize=128)
 def fetch_search_results(query):
     ydl_opts = {
         "quiet": True,
         "no_warnings": True,
-        "extract_flat": "in_playlist", 
+        "extract_flat": True, 
         "skip_download": True,
-        "ignoreerrors": True, # Skips broken videos instead of crashing
-        "socket_timeout": 10
+        "socket_timeout": 10  
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(query, download=False)
         
-    if not info:
-        return {"tracks": [], "source_title": "No results found"}
-
     tracks = []
     source_title = info.get("title") or info.get("id") or "Media Search"
     if query.startswith("ytsearch"):
@@ -64,6 +43,7 @@ def fetch_search_results(query):
 
 @app.route("/", methods=["GET"])
 def index():
+    
     return render_template("index.html")
 
 @app.route("/api/parse", methods=["POST"])
@@ -78,6 +58,7 @@ def parse_input():
         query = f"ytsearch15:{query}" 
 
     try:
+    
         result = fetch_search_results(query)
         return jsonify(result), 200
     except Exception as e:
@@ -93,9 +74,7 @@ def get_stream():
         return jsonify({"error": "Video ID missing."}), 400
 
     target_url = video_id if video_id.startswith("http") else f"https://www.youtube.com/watch?v={video_id}"
-    
-    # Priority on m4a for audio. Browsers keep m4a alive in the background better than webm.
-    format_str = "best" if mode == "video" else "bestaudio[ext=m4a]/bestaudio/best"
+    format_str = "best" if mode == "video" else "bestaudio/best"
 
     ydl_opts = {
         "quiet": True,
@@ -136,7 +115,7 @@ def download_track():
         "quiet": True,
         "no_warnings": True,
         "skip_download": True,
-        "format": "bestaudio[ext=m4a]/bestaudio/best",
+        "format": "bestaudio/best",
         "noplaylist": True,
         "socket_timeout": 10
     }
@@ -153,4 +132,5 @@ def download_track():
         return str(e), 500
 
 if __name__ == "__main__":
+
     app.run(host="0.0.0.0", port=5000, debug=True)
