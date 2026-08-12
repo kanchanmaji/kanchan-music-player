@@ -39,7 +39,7 @@
 ```text
 Kanchan-Player/
 │
-├── app.py
+├── main.py
 ├── requirements.txt
 ├── .gitignore
 ├── README.md
