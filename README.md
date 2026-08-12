@@ -1,50 +1,42 @@
-🎧 Kanchan Player
+# 🎧 Kanchan Player
 
-«A modern, lightweight media player powered by Python, Flask, and yt-dlp.»
+> A modern, lightweight media player powered by Python, Flask, and yt-dlp.
 
-Kanchan Player is a self-hostable web-based media application built with Flask and yt-dlp. It provides a clean API-driven architecture for searching media, retrieving metadata, resolving audio/video streams, and integrating those streams into a custom frontend.
+**Kanchan Player** is a self-hostable web-based media application built with Flask and yt-dlp. It provides a clean API-driven architecture for searching media, retrieving metadata, resolving audio/video streams, and integrating those streams into a custom frontend.
 
-Built by Kanchan Maji.
-
----
-
-✨ Features
-
-Feature| Description
-🔎 Media Search| Search YouTube content directly from the application
-🎵 Audio Streaming| Resolve high-quality audio streams
-🎬 Video Streaming| Resolve available video streams
-🖼️ Thumbnails| Automatically retrieve video thumbnails
-⚡ Search Cache| Cache repeated searches using Python's "lru_cache"
-🌐 REST API| Simple JSON-based API endpoints
-📱 Responsive UI| Designed to work with desktop and mobile frontends
-🚀 Production Ready| Compatible with Gunicorn
-🧩 Self-Hosted| Run it on your own server or local machine
+**Built by Kanchan Maji.**
 
 ---
 
-🛠️ Technology Stack
+## ✨ Features
 
-Python
-   │
-   ├── Flask
-   │     └── REST API
-   │
-   └── yt-dlp
-         └── Media extraction
-
-Core Technologies
-
-- Python — Application backend
-- Flask — Web framework and REST API
-- yt-dlp — Media metadata and stream extraction
-- Gunicorn — Production WSGI server
-- HTML / CSS / JavaScript — Frontend
+| Feature | Description |
+|---|---|
+| 🔎 Media Search | Search YouTube content directly from the application |
+| 🎵 Audio Streaming | Resolve available audio streams |
+| 🎬 Video Streaming | Resolve available video streams |
+| 🖼️ Thumbnails | Automatically retrieve video thumbnails |
+| ⚡ Search Cache | Cache repeated searches using Python's `lru_cache` |
+| 🌐 REST API | Simple JSON-based API endpoints |
+| 📱 Responsive UI | Designed for desktop and mobile frontends |
+| 🚀 Production Ready | Compatible with Gunicorn |
+| 🧩 Self-Hosted | Run on your own server or local machine |
 
 ---
 
-📁 Project Structure
+## 🛠️ Technology Stack
 
+- **Python** — Backend
+- **Flask** — Web framework and REST API
+- **yt-dlp** — Media metadata and stream extraction
+- **Gunicorn** — Production WSGI server
+- **HTML / CSS / JavaScript** — Frontend
+
+---
+
+## 📁 Project Structure
+
+```text
 Kanchan-Player/
 │
 ├── app.py
@@ -56,98 +48,110 @@ Kanchan-Player/
 │   └── index.html
 │
 └── static/
-    │
     ├── css/
     │   └── style.css
-    │
     ├── js/
     │   └── app.js
-    │
     └── images/
         └── ...
+```
 
 ---
 
-⚙️ Requirements
+## ⚙️ Requirements
 
-Make sure you have:
-
-- Python 3.9+
-- "pip"
+- Python **3.9+**
+- `pip`
 - Internet connection
 - Flask
 - yt-dlp
-- Gunicorn (production only)
+- Gunicorn *(production only)*
 
 ---
 
-🚀 Installation
+## 🚀 Installation
 
-1. Clone the repository
+### 1. Clone the repository
 
+```bash
 git clone YOUR_REPOSITORY_URL
 cd Kanchan-Player
+```
 
-2. Create a virtual environment
+### 2. Create a virtual environment
 
-Linux / macOS
+#### Linux / macOS
 
+```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
-Windows
+#### Windows
 
+```powershell
 python -m venv venv
 venv\Scripts\activate
+```
 
-3. Install dependencies
+### 3. Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-Example:
+Example `requirements.txt`:
 
+```text
 Flask
 yt-dlp
 gunicorn
+```
 
 ---
 
-▶️ Run Locally
+## ▶️ Run Locally
 
-Start the application:
-
+```bash
 python app.py
+```
 
-The server will run on:
+Open:
 
+```text
 http://127.0.0.1:5000
+```
 
-For access from another device on the same network:
+For another device on the same network:
 
+```text
 http://YOUR_LOCAL_IP:5000
-
-Example:
-
-http://192.168.1.10:5000
+```
 
 ---
 
-🔌 API Documentation
+# 🔌 API Documentation
 
-🔎 Search Media
+## 🔎 Search Media
 
-Endpoint
+### Endpoint
 
+```http
 POST /api/parse
+Content-Type: application/json
+```
 
-Request
+### Request
 
+```json
 {
   "query": "lofi music"
 }
+```
 
-Example Response
+### Example Response
 
+```json
 {
   "source_title": "Search: lofi music",
   "tracks": [
@@ -159,59 +163,74 @@ Example Response
     }
   ]
 }
+```
 
 ---
 
-🎵 Resolve Audio Stream
+## 🎵 Resolve Audio Stream
 
-Endpoint
+### Endpoint
 
+```http
 POST /api/stream
+Content-Type: application/json
+```
 
-Request
+### Request
 
+```json
 {
   "video_id": "VIDEO_ID",
   "mode": "audio"
 }
+```
 
-Response
+### Response
 
+```json
 {
   "stream_url": "https://..."
 }
+```
 
 ---
 
-🎬 Resolve Video Stream
+## 🎬 Resolve Video Stream
 
-Request
+### Request
 
+```json
 {
   "video_id": "VIDEO_ID",
   "mode": "video"
 }
+```
 
-Response
+### Response
 
+```json
 {
   "stream_url": "https://..."
 }
+```
 
 ---
 
-⬇️ Audio Redirect
+## ⬇️ Audio Redirect
 
-Endpoint
+### Endpoint
 
+```http
 GET /api/download?video_id=VIDEO_ID
+```
 
-The server resolves the available audio stream and redirects the request to the resulting media URL.
+The endpoint resolves the available audio stream and redirects the request to the resulting media URL.
 
 ---
 
-🧠 Architecture
+# 🧠 Architecture
 
+```text
                     ┌──────────────────┐
                     │    User / UI     │
                     └────────┬─────────┘
@@ -236,54 +255,49 @@ The server resolves the available audio stream and redirects the request to the 
                     ┌──────────────────┐
                     │ Media Platform   │
                     └──────────────────┘
+```
 
 ---
 
-⚡ Caching
+# ⚡ Caching
 
-Search results use Python's built-in "lru_cache":
+Search results use Python's built-in `lru_cache`:
 
+```python
 @lru_cache(maxsize=128)
 def fetch_search_results(query):
     ...
+```
 
-This prevents repeated extraction requests for recently searched queries.
+This reduces repeated extraction requests for identical searches.
 
-Important
+The cache is **process-local**. With multiple Gunicorn workers, each worker has its own cache.
 
-The cache is process-local.
-
-If you run:
-
-gunicorn --workers 4 app:app
-
-each worker maintains its own cache.
-
-For a larger deployment, Redis or another shared caching layer would be more appropriate.
+For larger deployments, Redis or another shared cache can be used.
 
 ---
 
-🚀 Production Deployment
+# 🚀 Production Deployment
 
-Do not use Flask's development server for production.
+Do **not** use Flask's development server for production.
 
 Use Gunicorn:
 
+```bash
 gunicorn app:app
+```
 
-A basic production configuration:
+Example:
 
-gunicorn \
-  --workers 2 \
-  --threads 4 \
-  --timeout 120 \
-  app:app
+```bash
+gunicorn --workers 2 --threads 4 --timeout 120 app:app
+```
 
-The correct worker configuration depends on the available CPU and memory of your server.
+Adjust the configuration according to the resources of your server.
 
 ---
 
-🔐 Security
+# 🔐 Security
 
 Before exposing Kanchan Player publicly, consider implementing:
 
@@ -297,78 +311,68 @@ Before exposing Kanchan Player publicly, consider implementing:
 - Abuse protection
 - Resource limits
 
-Avoid exposing raw exceptions
+For production, avoid returning raw internal exceptions to clients.
 
-Development code may contain:
+Instead of:
 
+```python
 except Exception as e:
     return jsonify({"error": str(e)}), 500
+```
 
-For production, use:
+prefer:
 
+```python
 except Exception:
     app.logger.exception("Media extraction failed")
     return jsonify({
         "error": "Unable to process the request."
     }), 500
-
-This prevents internal implementation details from being unnecessarily exposed to users.
+```
 
 ---
 
-📦 ".gitignore"
-
-Do not commit local environments, secrets, caches, or temporary files.
+# 📦 `.gitignore`
 
 Recommended:
 
-# Python
+```gitignore
 __pycache__/
 *.py[cod]
 *.pyo
 
-# Virtual environments
 venv/
 .venv/
 env/
 
-# Environment variables
 .env
 .env.*
 
-# Logs
 *.log
-
-# Local configuration
 *.local
 
-# yt-dlp / cookies
 cookies.txt
 cookies.json
 
-# OS files
 .DS_Store
 Thumbs.db
+```
 
 ---
 
-🔄 Updating yt-dlp
+# 🔄 Updating yt-dlp
 
-Media platforms can change their extraction systems.
+Media platforms can change their extraction systems. Keep yt-dlp updated:
 
-Update yt-dlp regularly:
-
-pip install -U yt-dlp
-
-Or:
-
+```bash
 python -m pip install -U yt-dlp
+```
 
 ---
 
-⚠️ Limitations
+# ⚠️ Limitations
 
-Kanchan Player relies on "yt-dlp" and external media platforms.
+Kanchan Player relies on yt-dlp and external media platforms.
 
 Therefore:
 
@@ -376,29 +380,21 @@ Therefore:
 - Stream URLs may be temporary.
 - Some media may not be available in every format.
 - Availability can vary by region or platform.
-- Multiple concurrent extraction requests can consume significant server resources.
+- Concurrent extraction can consume significant server resources.
 
 ---
 
-⚖️ Legal & Responsible Use
+# ⚖️ Legal & Responsible Use
 
 Kanchan Player is intended as a technical project demonstrating Flask API development, media metadata extraction, and stream integration.
 
-Users are responsible for complying with:
-
-- Applicable laws
-- Copyright requirements
-- Platform terms of service
-- Content licensing requirements
-- Permissions associated with the media being accessed
+Users are responsible for complying with applicable laws, copyright requirements, platform terms of service, and content licensing requirements.
 
 Do not use the software to circumvent access controls or obtain content without the necessary rights or permissions.
 
 ---
 
-🗺️ Roadmap
-
-Future versions may include:
+# 🗺️ Roadmap
 
 - [ ] Modern music-player interface
 - [ ] Playlist support
@@ -419,12 +415,13 @@ Future versions may include:
 
 ---
 
-👨‍💻 Author
+# 👨‍💻 Author
 
-Kanchan Maji
+## Kanchan Maji
 
-Kanchan Player is designed and developed by Kanchan Maji.
+**Kanchan Player** is designed and developed by **Kanchan Maji**.
 
+```text
 ╔══════════════════════════════════════╗
 ║                                      ║
 ║          K A N C H A N               ║
@@ -432,25 +429,30 @@ Kanchan Player is designed and developed by Kanchan Maji.
 ║          Kanchan Player              ║
 ║                                      ║
 ╚══════════════════════════════════════╝
+```
 
 ---
 
-📄 License
+# 📄 License
 
-Choose a license before distributing the project publicly.
+Choose an appropriate open-source license before distributing the project publicly.
 
 For example:
 
+```text
 MIT License
+```
 
-If using MIT, include the standard MIT License text in a separate "LICENSE" file.
+If using MIT, include the standard MIT License text in a separate `LICENSE` file.
 
 ---
 
-<div align="center">🎧 Kanchan Player
+<div align="center">
 
-Built with Python • Flask • yt-dlp
+### 🎧 Kanchan Player
 
-Made by Kanchan Maji
+**Built with Python • Flask • yt-dlp**
+
+**Made by Kanchan Maji**
 
 </div>
